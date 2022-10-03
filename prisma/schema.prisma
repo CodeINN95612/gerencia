@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Employee {
+  id          Int     @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  phone       String?
+  mobilePhone String?
+  email       String
+  addres      String
+
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  password String
+
+  employee         Employee?
+  userCompanyRoles UserCompanyRole[]
+}
+
+model Role {
+  id       Int     @id @default(autoincrement())
+  name     String
+  detail   String
+  isActive Boolean
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  userCompanyRoles UserCompanyRole[]
+}
+
+model Company {
+  id            Int      @id @default(autoincrement())
+  name          String
+  comercialName String
+  ruc           String   @unique
+  creationDate  DateTime
+  isActive      Boolean
+
+  roles            Role[]
+  userCompanyRoles UserCompanyRole[]
+}
+
+model UserCompanyRole {
+  id Int @id @default(autoincrement())
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  roleId Int
+  role   Role @relation(fields: [roleId], references: [id])
+
+  creationDate DateTime
+  isActive     Boolean
+}
