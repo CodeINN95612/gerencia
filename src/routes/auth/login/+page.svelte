@@ -1,3 +1,4 @@
+<h1 class="mb-3">Ingresar</h1>
 <form method="POST" action="?/login">
     <div class="mb-3">
         <label for="username" class="form-label">Nombre de Usuario</label>
@@ -19,6 +20,18 @@
             autocomplete="off"
         />
     </div>
-    <input type="submit" value="Ingresar" class="btn btn-primary" />
-    <a href="/admin/company" class="btn btn-primary">IngresarTest</a>
+    <div class="row g-2">
+        <div class="col-sm-12 col-md-6">
+            <input
+                type="submit"
+                value="Ingresar"
+                class="btn btn-success w-100"
+            />
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <a href="/auth/register" class="btn btn-secondary w-100"
+                >Registrarse</a
+            >
+        </div>
+    </div>
 </form>

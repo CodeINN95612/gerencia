@@ -8,7 +8,6 @@
     style="max-width: 576px;"
 >
     <div class="container border rounded py-3 shadow-sm">
-        <h1 class="mb-3">Autenticación</h1>
         <slot />
     </div>
 </div>
