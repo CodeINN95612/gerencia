@@ -27,7 +27,14 @@ const login: Action = async ({ request, cookies }) => {
         return invalid(400, { user: false })
     }
 
-    cookies.set('sesion', user.id + '' + user.username, {
+    const authId = crypto.randomUUID();
+
+    await db.user.update({
+        where: { username },
+        data: { authId }
+    });
+
+    cookies.set('session', authId, {
         path: '/',
         httpOnly: true,
         sameSite: 'strict',

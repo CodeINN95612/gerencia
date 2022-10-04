@@ -28,6 +28,8 @@ model User {
   username String @unique
   password String
 
+  authId String? @unique
+
   employee         Employee?
   userCompanyRoles UserCompanyRole[]
 }
