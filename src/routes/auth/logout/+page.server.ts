@@ -1,5 +1,4 @@
 import { db } from "$lib/database/GerenciaDB";
-import type { User } from "@prisma/client";
 import { redirect, type Actions } from "@sveltejs/kit"
 import type { PageServerLoad } from './$types'
 
