@@ -33,20 +33,20 @@ export const actions: Actions = {
 
         const name = data.get('name')?.toString();
         if (!name || name == "")
-            return invalid(400, { name, missing: true });
+            return invalid(400, { missing_name: true });
 
         const comercialName = data.get('comercialName')?.toString()
         if (!comercialName || comercialName == "")
-            return invalid(400, { comercialName, missing: true })
+            return invalid(400, { missing_commercial: true })
 
 
         const ruc = data.get('ruc')?.toString()
         if (!ruc || ruc === "")
-            return invalid(400, { ruc, missing: true })
+            return invalid(400, { missing_ruc: true })
 
         const creationDateStr = data.get('creationDate')?.toString() ?? "";
         if (!creationDateStr || creationDateStr == "")
-            return invalid(400, { creationDateStr, missing: true });
+            return invalid(400, { missing_date: true });
         const creationDate = new Date(creationDateStr);
 
         const isActive = data.get('isActive') == "on";
@@ -65,7 +65,6 @@ export const actions: Actions = {
             else {
                 await db.company.update({
                     where: { id }, data: {
-                        id,
                         name,
                         comercialName,
                         ruc,
@@ -76,7 +75,7 @@ export const actions: Actions = {
             }
         }
         catch (error) {
-            return invalid(500, { id, error })
+            return invalid(500, { is_error: true, error })
         }
 
         throw redirect(303, "/admin/company")

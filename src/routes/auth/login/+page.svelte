@@ -1,3 +1,9 @@
+<script lang="ts">
+    import type { ActionData } from "./$types";
+
+    export let form: ActionData;
+</script>
+
 <h1 class="mb-3">Ingresar</h1>
 <form method="POST" action="?/login">
     <div class="mb-3">
@@ -8,6 +14,7 @@
             name="username"
             id="username"
             autocomplete="off"
+            required
         />
     </div>
     <div class="mb-3">
@@ -18,6 +25,7 @@
             name="password"
             id="password"
             autocomplete="off"
+            required
         />
     </div>
     <div class="row g-2">
@@ -33,5 +41,13 @@
                 >Registrarse</a
             >
         </div>
+        {#if form?.invalid}
+            <div class="alert alert-danger">
+                Usuario y Contraseña obligatorios
+            </div>
+        {/if}
+        {#if form?.user === false}
+            <div class="alert alert-danger">Credenciales invalidas</div>
+        {/if}
     </div>
 </form>
