@@ -65,6 +65,7 @@ export const actions: Actions = {
             else {
                 await db.company.update({
                     where: { id }, data: {
+                        id,
                         name,
                         comercialName,
                         ruc,
@@ -75,7 +76,7 @@ export const actions: Actions = {
             }
         }
         catch (error) {
-            return invalid(500, { is_error: true, error })
+            return invalid(400, { is_error: true, error })
         }
 
         throw redirect(303, "/admin/company")
