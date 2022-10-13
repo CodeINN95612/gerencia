@@ -1,28 +1,28 @@
-# Gerencia
+# Proyecto de Gerencia en SvelteKit
+Se trata de un sistema de administración de empleados y de nómina simple de utilizar y parametrizar.
+Es creada en SvelteKit con TypeScript.
 
-### create-svelte
+## ¿Cómo ejecutar el proyecto?
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+1. Clonar el repositorio
+2. En una consola ejecutar el comando `npm install` para instalar las dependencias.
+3. Una vez instalado todo, Se puede iniciar el proyecto con `npm run dev`.
+4. Si se desea iniciar sesion, se puede usar el usuario por defecto de usuario y contraseña `admin`
 
-## Developing
+- Tambien se puede acceder a la base de datos a travéz del administrador de base de datos prisma, para esto en una consola se puede ejecutar el comando `npx prisma studio`.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## ¿Cómo usar el proyecto?
+Actualmente el proyecto solo tiene la funcionalidad de Autenticación, Autorización y un crud básico en la tabla de `Company`
 
-```bash
-npm run dev
+Para iniciar sesión se requiere ir al url `/auth/login`.
+Para registrarse se requiere ir al url `/auth/regiser`.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+Si ya se encuentra iniciado sesión puede dirigirse a la lista de empresas en `/admin/company`, para crear una nueva empresa puede ir a `/admin/company/0`, para visitar una companía que ya existe debe ir a `admin/company/id` donde id es un entero y es el idedntificador de la empresa en la base de datos.
 
-## Building
+El sistema ya tiene botones y links de enrutamiento por defecto entonces, en teoría, no debería necesitarse utilizar ninguno de los url previamente mencionados.
 
-To create a production version of your app:
+## Créditos
+- Damián Briones: Creador y programador único.
 
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Tests
+No se han realizado tests por el momento.
