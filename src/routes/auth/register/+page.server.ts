@@ -27,7 +27,7 @@ const register: Action = async ({ request }) => {
         }
     });
 
-    throw redirect(302, "/admin/login")
+    throw redirect(302, "/auth/login")
 
 }
 
