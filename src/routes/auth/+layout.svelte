@@ -3,11 +3,23 @@
     <meta name="description" content="Pagina de Ingreso" />
 </svelte:head>
 
-<div
+<!-- <div
     class="container vh-100 d-flex align-items-center justify-content-center"
     style="max-width: 576px;"
 >
     <div class="container border rounded py-3 shadow-sm">
         <slot />
     </div>
+</div> -->
+
+<div class="my-container">
+    <slot />
 </div>
+
+<style>
+    .my-container {
+        display: grid;
+        grid-template-columns: 250px auto;
+        height: 100vh;
+    }
+</style>

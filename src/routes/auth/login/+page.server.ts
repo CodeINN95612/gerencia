@@ -42,7 +42,7 @@ const login: Action = async ({ request, cookies }) => {
         maxAge: 60 * 15
     });
 
-    throw redirect(302, "/admin/company")
+    throw redirect(302, "/test")
 
 }
 
