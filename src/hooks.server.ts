@@ -13,7 +13,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     if (user) {
         event.locals.user = {
             name: user.username,
-            easter: ':v'
+            id: user.id
         }
     }
 

@@ -30,6 +30,8 @@ model User {
 
   authId String? @unique
 
+  createdCompanies Company[]
+
   employee         Employee?
   userCompanyRoles UserCompanyRole[]
 }
@@ -47,12 +49,14 @@ model Role {
 }
 
 model Company {
-  id            Int      @id @default(autoincrement())
-  name          String
-  comercialName String
-  ruc           String   @unique
-  creationDate  DateTime
-  isActive      Boolean
+  id             Int      @id @default(autoincrement())
+  name           String
+  comercialName  String
+  ruc            String   @unique
+  creationDate   DateTime
+  isActive       Boolean
+  creationUserId Int
+  user           User     @relation(fields: [creationUserId], references: [id])
 
   roles            Role[]
   userCompanyRoles UserCompanyRole[]

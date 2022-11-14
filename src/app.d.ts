@@ -5,7 +5,7 @@ declare namespace App {
 	interface Locals {
 		user: {
 			name: string,
-			easter: string
+			id: number
 		}
 	}
 	// interface PageData {}

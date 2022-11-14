@@ -1,6 +1,5 @@
 import type { Actions, PageServerLoad } from './$types'
 import { db } from '$lib/database/GerenciaDB'
-import type { Company } from '@prisma/client'
 import { invalid, redirect } from '@sveltejs/kit'
 
 export const load: PageServerLoad = async (params) => {
@@ -26,7 +25,7 @@ export const load: PageServerLoad = async (params) => {
 
 
 export const actions: Actions = {
-    createOrUpdate: async ({ request, params }) => {
+    createOrUpdate: async ({ request, params, locals }) => {
         const data = await request.formData();
 
         const id = parseInt(params.id);
@@ -58,6 +57,7 @@ export const actions: Actions = {
                         comercialName,
                         ruc,
                         creationDate,
+                        creationUserId: locals.user.id,
                         isActive
                     }
                 });
