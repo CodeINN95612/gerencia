@@ -29,12 +29,14 @@ const search: Action = async ({ request }) => {
     const employeeSelection = await db.company.findUnique({
         where: { id },
         select: {
+            id: true,
             userCompanyRoles: {
                 select: {
                     user: {
                         select: {
                             employee: {
                                 select: {
+                                    id: true,
                                     user: true,
                                     firstName: true,
                                     lastName: true
@@ -57,7 +59,7 @@ const search: Action = async ({ request }) => {
             return e !== null;
         });
 
-    return invalid(200, { employees });
+    return invalid(200, { employees, companyId: employeeSelection.id });
 }
 
 export const actions: Actions = { search }; 

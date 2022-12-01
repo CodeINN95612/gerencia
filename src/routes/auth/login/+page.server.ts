@@ -39,7 +39,7 @@ const login: Action = async ({ request, cookies }) => {
         httpOnly: true,
         sameSite: 'strict',
         secure: false, //TODO
-        maxAge: 60 * 15
+        maxAge: 60 * 60
     });
 
     throw redirect(302, "/admin/company")

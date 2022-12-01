@@ -28,6 +28,10 @@
 {/if}
 
 {#if form?.employees}
+    <a
+        href={`/admin/employee/${form?.companyId}/0`}
+        class="btn btn-primary mb-3">Nuevo</a
+    >
     <table class="table table-hover">
         <thead>
             <tr>
@@ -43,7 +47,12 @@
                     <td>{employee.firstName}</td>
                     <td>{employee.lastName}</td>
                     <td>{employee.user.username}</td>
-                    <td />
+                    <td>
+                        <a
+                            href={`/admin/employee/${form?.companyId}/${employee.id}`}
+                            >edit</a
+                        >
+                    </td>
                 </tr>
             {/each}
         </tbody>
