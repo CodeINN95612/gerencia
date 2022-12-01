@@ -184,8 +184,6 @@ export const actions: Actions = {
                 });
             }
             else {
-                console.log("update");
-
                 const employee = await db.employee.update({
                     where: { id },
                     data: {
@@ -203,12 +201,10 @@ export const actions: Actions = {
                         }
                     }
                 });
-                console.log(employee);
 
                 const companyRole = await db.userCompanyRole.findFirstOrThrow({
                     where: { companyId: c_id, userId: employee.userId }
                 })
-                console.log(role);
 
                 await db.userCompanyRole.update({
                     where: { id: companyRole.id },
@@ -216,12 +212,10 @@ export const actions: Actions = {
                         roleId: role.id
                     }
                 })
-                console.log("end");
             }
         } catch (error) {
             return invalid(400, { is_error: true, error });
         }
-        console.log("redirect");
 
         throw redirect(303, "/admin/employee");
     }
