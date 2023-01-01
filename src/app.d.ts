@@ -3,7 +3,11 @@
 // and what to do when importing types
 declare namespace App {
 	interface Locals {
-		user: {
+		employee: {
+			name: string,
+			employeeId: number
+		}
+		company: {
 			name: string,
 			id: number
 		}

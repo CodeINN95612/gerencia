@@ -4,6 +4,6 @@
 
 <Header />
 
-<div class="container-md">
+<div class="container mt-3">
     <slot />
 </div>

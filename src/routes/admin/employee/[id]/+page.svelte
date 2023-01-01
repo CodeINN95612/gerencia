@@ -1,17 +1,27 @@
 <script lang="ts">
-    import type { ActionData } from "./$types";
-
     export let data: any;
-    const roles = data.roles;
-    let employee = data.employee;
-    let companyRole = data.role;
 
-    export let form: ActionData;
+    let { roles, contracts } = data.requirements ?? {
+        roles: [],
+        contracts: [],
+    };
+    let employee = data.employee;
+
+    export let form: any;
 </script>
 
-<h2>Employee</h2>
-<form action="?/createOrUpdate" method="POST">
-    <div class="personal-data">
+<svelte:head>
+    <title>Employee</title>
+</svelte:head>
+
+{#if employee.name}
+    <h2>{employee.name}</h2>
+{:else}
+    <h2>New Employee</h2>
+{/if}
+
+<form action="?/createOrUpdate" method="POST" class="mt-3">
+    <div class="personal-data d-flex flex-column">
         <h3>Personal Data</h3>
 
         <label for="firstname">First Name:</label>
@@ -19,7 +29,7 @@
             type="text"
             name="firstname"
             id="firstname"
-            bind:value={employee.firstName}
+            bind:value={employee.name}
             required
         />
 
@@ -32,39 +42,12 @@
             required
         />
 
-        <label for="phone">Phone #:</label>
-        <input
-            type="tel"
-            name="phone"
-            id="phone"
-            bind:value={employee.phone}
-            required
-        />
-
-        <label for="mobilephone">Mobile Phone #:</label>
-        <input
-            type="tel"
-            name="mobilephone"
-            id="mobilephone"
-            bind:value={employee.mobilePhone}
-            required
-        />
-
-        <label for="email">E-mail:</label>
-        <input
-            type="email"
-            name="email"
-            id="email"
-            bind:value={employee.email}
-            required
-        />
-
-        <label for="address">Address:</label>
+        <label for="identification">Identification:</label>
         <input
             type="text"
-            name="address"
-            id="address"
-            bind:value={employee.addres}
+            name="identification"
+            id="identification"
+            bind:value={employee.identification}
             required
         />
     </div>
@@ -76,7 +59,7 @@
             type="text"
             name="username"
             id="username"
-            bind:value={employee.user.username}
+            bind:value={employee.username}
             required
         />
 
@@ -85,26 +68,36 @@
             type="password"
             name="password"
             id="password"
-            bind:value={employee.user.password}
+            bind:value={employee.password}
             required
         />
 
         <label for="role">Role:</label>
-        <select name="role" id="role" bind:value={companyRole.id} required>
+        <select name="role" id="role" bind:value={employee.roleId} required>
             {#each roles as role}
                 <option value={role.id}>{role.name}</option>
             {/each}
         </select>
 
+        <label for="contract">Contract:</label>
+        <select
+            name="contract"
+            id="contract"
+            bind:value={employee.contractId}
+            required
+        >
+            {#each contracts as contract}
+                <option value={contract.id}>{contract.name}</option>
+            {/each}
+        </select>
+
         <input type="submit" value="Done" class="btn btn-primary" />
         {#if form?.missing}
-            <div class="alert alert-danger">
-                Faltan llenar campos obligatorios
-            </div>
+            <div class="alert alert-danger">You must fill all the form</div>
         {/if}
         {#if form?.is_error}
             <div class="alert alert-danger">
-                Error de servidor: {form?.error}
+                Server Error: {form?.error}
             </div>
         {/if}
     </div>
@@ -121,9 +114,9 @@
         max-width: 250px;
     } */
 
-    .personal-data {
+    /* .personal-data {
         display: grid;
-    }
+    } */
 
     .user-data > label {
         padding-top: 5px;

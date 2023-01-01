@@ -1,57 +1,39 @@
 <script lang="ts">
+    import type { Employee } from "@prisma/client";
     import type { ActionData } from "./$types";
 
     export let data: any;
-    export let form: ActionData;
 </script>
 
 <svelte:head>
     <title>Employee</title>
 </svelte:head>
 
-<h1>Employee</h1>
-
-<div class="container my-5">
-    <form action="?/search" class="search-form" method="POST">
-        <label for="company">Company: </label>
-        <select name="company" id="company">
-            {#each data.companies as company}
-                <option value={company.id}>{company.name}</option>
-            {/each}
-        </select>
-        <input type="submit" value="Buscar" />
-    </form>
-</div>
-
-{#if form?.invalid}
-    <div class="alert alert-danger">Error en servidor</div>
-{/if}
-
-{#if form?.employees}
-    <a
-        href={`/admin/employee/${form?.companyId}/0`}
-        class="btn btn-primary mb-3">Nuevo</a
-    >
+<h2>Employees</h2>
+{#if !data.employees || data.employees.length === 0}
+    <p>No employees available</p>
+    <a href="admin/employee/0" class="btn btn-primary mt-3">Create new</a>
+{:else}
+    <a href={`/admin/employee/0`} class="btn btn-primary my-3">New</a>
     <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Firstname</th>
                 <th scope="col">Lastname</th>
-                <th scope="col">Assigned User</th>
+                <th scope="col">Username</th>
+                <th scope="col">Role</th>
                 <th scope="col" />
             </tr>
         </thead>
         <tbody>
-            {#each form.employees as employee}
+            {#each data.employees as employee}
                 <tr>
-                    <td>{employee.firstName}</td>
+                    <td>{employee.name}</td>
                     <td>{employee.lastName}</td>
-                    <td>{employee.user.username}</td>
+                    <td>{employee.username}</td>
+                    <td>{employee.role}</td>
                     <td>
-                        <a
-                            href={`/admin/employee/${form?.companyId}/${employee.id}`}
-                            >edit</a
-                        >
+                        <a href={`/admin/employee/${employee.id}`}>edit</a>
                     </td>
                 </tr>
             {/each}

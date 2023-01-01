@@ -9,16 +9,28 @@
             style="flex-direction:row; gap: 10px;"
         >
             <li class="nav-item">
-                <a href="/admin/company" class="nav-link"> Empresas </a>
-            </li>
-            <li class="nav-item">
                 <a href="/admin/employee" class="nav-link"> Empleados </a>
             </li>
+            <li class="nav-item">
+                <a href="/admin/role" class="nav-link"> Role </a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/contract" class="nav-link"> Contract </a>
+            </li>
         </ul>
-        <form method="POST" action="/auth/logout" class="navbar-nav ms-auto">
+        <form method="POST" class="navbar-nav ms-auto">
             <li class="nav-item mx-3">
-                <button class="nav-link btn bg-transparent" type="submit"
-                    >Salir</button
+                <button
+                    class="nav-link btn bg-transparent"
+                    type="submit"
+                    formaction="/auth/logout">Log Out</button
+                >
+            </li>
+            <li class="nav-item mx-3">
+                <button
+                    class="nav-link btn bg-transparent"
+                    type="submit"
+                    formaction="/admin/">Change Company</button
                 >
             </li>
         </form>
