@@ -3,13 +3,6 @@ import { db } from '$lib/database/GerenciaDB'
 import { invalid, type Action, type Actions, redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ locals }) => {
-
-    if (!locals.employee)
-        throw redirect(302, '/');
-
-    if (!locals.company)
-        throw redirect(302, '/admin/');
-
     const fetchCompanies = async () => {
         let companies = await db.company.findMany({
             where: {

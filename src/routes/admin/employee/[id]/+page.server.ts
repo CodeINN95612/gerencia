@@ -25,10 +25,18 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 
             }
         });
+        let employees = await db.employee.findMany({
+            where: {
+                id: {
+                    not: +params.id
+                }
+            }
+        })
 
         return {
             roles: requirements?.roles,
-            contracts: requirements?.Contract
+            contracts: requirements?.Contract,
+            employees
         }
     }
 
@@ -146,6 +154,13 @@ export const actions: Actions = {
         if (!contractIDStr || contractIDStr === '') {
             return invalid(400, { missing: true });
         }
+
+        const superiorIDStr = data.get('superior')?.toString();
+        let superiorId: number | null = null;
+        if (superiorIDStr && superiorIDStr !== '') {
+            superiorId = +superiorIDStr;
+        }
+
         try {
             if (id === 0) {
                 await db.employee.create({
@@ -175,7 +190,8 @@ export const actions: Actions = {
                                     }
                                 }
                             }
-                        }
+                        },
+                        superiorId
                     }
                 });
             }
@@ -207,7 +223,8 @@ export const actions: Actions = {
                                     }
                                 }
                             }
-                        }
+                        },
+                        superiorId
                     }
                 });
             }

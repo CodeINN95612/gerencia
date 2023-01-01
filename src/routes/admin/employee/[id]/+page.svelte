@@ -1,9 +1,10 @@
 <script lang="ts">
     export let data: any;
 
-    let { roles, contracts } = data.requirements ?? {
+    let { roles, contracts, employees } = data.requirements ?? {
         roles: [],
         contracts: [],
+        employees: [],
     };
     let employee = data.employee;
 
@@ -50,6 +51,14 @@
             bind:value={employee.identification}
             required
         />
+
+        <label for="superior">Superior:</label>
+        <select name="superior" id="superior" bind:value={employee.superiorId}>
+            <option disabled selected value> -- No Superior --</option>
+            {#each employees as employee}
+                <option value={employee.id}>{employee.name}</option>
+            {/each}
+        </select>
     </div>
     <div class="user-data d-flex flex-column">
         <h3>User Data</h3>

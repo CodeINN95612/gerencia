@@ -22,6 +22,7 @@
                 <th scope="col">Lastname</th>
                 <th scope="col">Username</th>
                 <th scope="col">Role</th>
+                <th scope="col">Superior</th>
                 <th scope="col" />
             </tr>
         </thead>
@@ -32,6 +33,7 @@
                     <td>{employee.lastName}</td>
                     <td>{employee.username}</td>
                     <td>{employee.role}</td>
+                    <td>{employee.superior}</td>
                     <td>
                         <a href={`/admin/employee/${employee.id}`}>edit</a>
                     </td>

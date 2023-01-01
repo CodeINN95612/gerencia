@@ -20,10 +20,14 @@ model Employee {
   password       String
   authId         String?  @unique
 
+  superiorId Int?
+  superior   Employee? @relation(fields: [superiorId], references: [id], name: "Superior")
+
   AssignedActivitiesBy  AssignedActivity[]      @relation(name: "AssignedActivitiesBy")
   AssignedActivitiesTo  AssignedActivity[]      @relation(name: "AssignedActivitiesTo")
   Activity              Activity[]
   Employee_RoleContract Employee_RoleContract[]
+  Employees             Employee[]              @relation(name: "Superior")
 }
 
 model Role {

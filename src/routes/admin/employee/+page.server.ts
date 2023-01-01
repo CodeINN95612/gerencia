@@ -29,6 +29,11 @@ export const load: PageServerLoad = async ({ locals }) => {
                             }
                         }
                     }
+                },
+                superior: {
+                    select: {
+                        name: true
+                    }
                 }
             }
         })
@@ -38,6 +43,7 @@ export const load: PageServerLoad = async ({ locals }) => {
             lastName: e.lastName,
             username: e.username,
             role: e.Employee_RoleContract[0].role.name,
+            superior: e.superior?.name ?? ""
         }));
     }
 
