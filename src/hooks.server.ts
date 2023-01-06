@@ -17,11 +17,17 @@ export const handle: Handle = async ({ event, resolve }) => {
         return await resolve(event);
     }
 
-    const employee = await db.employee.findUnique({ where: { authId: session } });
+    const employee = await db.employee.findUnique({
+        where: { authId: session },
+        select: {
+            name: true,
+            id: true,
+        }
+    });
     if (employee) {
         event.locals.employee = {
             name: employee.name,
-            employeeId: employee.id
+            employeeId: employee.id,
         };
     }
 
@@ -36,6 +42,34 @@ export const handle: Handle = async ({ event, resolve }) => {
         };
     }
 
+    if (!company || !employee) {
+        return await resolve(event);
+    }
+
+    const role = await db.employee_RoleContract.findFirst({
+        where: {
+            companyId: company.id,
+            employeeId: employee.id
+        },
+        orderBy: {
+            date: 'desc'
+        },
+        select: {
+            role: {
+                select: {
+                    id: true,
+                    isAdmin: true
+                }
+            }
+        }
+    });
+
+    if (role) {
+        event.locals.role = {
+            id: role.role.id,
+            isAdmin: role.role.isAdmin
+        }
+    }
     return await resolve(event);
 
 }

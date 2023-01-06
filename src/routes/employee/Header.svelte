@@ -1,3 +1,7 @@
+<script lang="ts">
+    export let canAssign: boolean;
+</script>
+
 <nav class="navbar navbar-dark navbar-expand-md bg-dark sticky-top">
     <div class="container-fluid">
         <!-- <button class="navbar-toggler" type="button">
@@ -9,17 +13,13 @@
             style="flex-direction:row; gap: 10px;"
         >
             <li class="nav-item">
-                <a href="/admin/employee" class="nav-link"> Empleados </a>
+                <a href="/employee/activity" class="nav-link"> Activities </a>
             </li>
-            <li class="nav-item">
-                <a href="/admin/role" class="nav-link"> Role </a>
-            </li>
-            <li class="nav-item">
-                <a href="/admin/contract" class="nav-link"> Contract </a>
-            </li>
-            <li class="nav-item">
-                <a href="/admin/report" class="nav-link"> Report </a>
-            </li>
+            {#if canAssign}
+                <li class="nav-item">
+                    <a href="/employee/assign" class="nav-link"> Assign </a>
+                </li>
+            {/if}
         </ul>
         <form method="POST" class="navbar-nav ms-auto">
             <li class="nav-item mx-3">

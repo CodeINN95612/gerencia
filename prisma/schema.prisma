@@ -89,6 +89,7 @@ model AssignedActivity {
   estimatedHours Int
   difficulty     Int
   assignedDate   DateTime
+  maxDate        DateTime
   completed      Boolean
   assignedById   Int
   assignedBy     Employee   @relation(fields: [assignedById], references: [id], name: "AssignedActivitiesBy")
@@ -104,10 +105,11 @@ model Activity {
   difficulty  Int
   hours       Int
   date        DateTime
+  maxDate     DateTime
   completed   Boolean
 
-  assignedActivityId Int
-  assignedActivity   AssignedActivity @relation(fields: [assignedActivityId], references: [id])
+  assignedActivityId Int?
+  assignedActivity   AssignedActivity? @relation(fields: [assignedActivityId], references: [id])
   employeeId         Int
-  employee           Employee         @relation(fields: [employeeId], references: [id])
+  employee           Employee          @relation(fields: [employeeId], references: [id])
 }

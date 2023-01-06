@@ -5,11 +5,15 @@ declare namespace App {
 	interface Locals {
 		employee: {
 			name: string,
-			employeeId: number
+			employeeId: number,
 		}
 		company: {
 			name: string,
 			id: number
+		}
+		role: {
+			id: number,
+			isAdmin: boolean
 		}
 	}
 	// interface PageData {}

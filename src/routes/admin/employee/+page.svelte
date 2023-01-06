@@ -1,7 +1,4 @@
 <script lang="ts">
-    import type { Employee } from "@prisma/client";
-    import type { ActionData } from "./$types";
-
     export let data: any;
 </script>
 
