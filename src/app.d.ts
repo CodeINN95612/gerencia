@@ -3,9 +3,17 @@
 // and what to do when importing types
 declare namespace App {
 	interface Locals {
-		user: {
+		employee: {
+			name: string,
+			employeeId: number,
+		}
+		company: {
 			name: string,
 			id: number
+		}
+		role: {
+			id: number,
+			isAdmin: boolean
 		}
 	}
 	// interface PageData {}

@@ -15,8 +15,12 @@ export const actions: Actions = {
             path: '/',
             expires: new Date(0)
         })
+        cookies.set('sessionCompany', '', {
+            path: '/',
+            expires: new Date(0)
+        })
 
-        await db.user.update({
+        await db.employee.update({
             where: { authId: session },
             data: { authId: null }
         })

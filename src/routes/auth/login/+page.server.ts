@@ -1,5 +1,4 @@
 import { db } from "$lib/database/GerenciaDB";
-import type { User } from "@prisma/client";
 import { invalid, redirect, type Action, type Actions } from "@sveltejs/kit";
 
 const login: Action = async ({ request, cookies }) => {
@@ -17,19 +16,19 @@ const login: Action = async ({ request, cookies }) => {
         return invalid(400, { invalid: true })
     }
 
-    const user = await db.user.findUnique({ where: { username } })
+    const employee = await db.employee.findUnique({ where: { username } })
 
-    if (!user) {
+    if (!employee) {
         return invalid(400, { user: false })
     }
 
-    if (user.password != password) {
+    if (employee.password != password) {
         return invalid(400, { user: false })
     }
 
     const authId = crypto.randomUUID();
 
-    await db.user.update({
+    await db.employee.update({
         where: { username },
         data: { authId }
     });
@@ -42,7 +41,7 @@ const login: Action = async ({ request, cookies }) => {
         maxAge: 60 * 60
     });
 
-    throw redirect(302, "/admin/company")
+    throw redirect(302, "/admin")
 
 }
 

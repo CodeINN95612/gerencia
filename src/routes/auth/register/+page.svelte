@@ -28,6 +28,39 @@
             required
         />
     </div>
+    <div class="mb-3">
+        <label class="form-label" for="nombre">Nombre</label>
+        <input
+            class="form-control"
+            type="nombre"
+            name="nombre"
+            id="nombre"
+            autocomplete="off"
+            required
+        />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="apellido">Apellido</label>
+        <input
+            class="form-control"
+            type="apellido"
+            name="apellido"
+            id="apellido"
+            autocomplete="off"
+            required
+        />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="identificacion">Identificacion</label>
+        <input
+            class="form-control"
+            type="identificacion"
+            name="identificacion"
+            id="identificacion"
+            autocomplete="off"
+            required
+        />
+    </div>
     <div class="row g-2">
         <div class="col-sm-12 col-md-6">
             <input

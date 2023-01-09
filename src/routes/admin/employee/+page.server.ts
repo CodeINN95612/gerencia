@@ -1,65 +1,53 @@
 import type { PageServerLoad } from './$types'
 import { db } from '$lib/database/GerenciaDB'
-import { invalid, type Action, type Actions } from '@sveltejs/kit';
-import { detach_before_dev } from 'svelte/internal';
-import type { Employee, User } from '@prisma/client';
 
 export const load: PageServerLoad = async ({ locals }) => {
 
-    const fetchCompanies = async () => {
-        return await db.company.findMany({
-            where: { creationUserId: locals.user.id, }
-        });
-    }
-
-    return {
-        companies: fetchCompanies()
-    }
-}
-
-const search: Action = async ({ request }) => {
-    const data = await request.formData();
-    var id = 0;
-
-    const idStr = data.get('company');
-    if (idStr !== null) {
-        id = +idStr;
-    }
-
-    const employeeSelection = await db.company.findUnique({
-        where: { id },
-        select: {
-            id: true,
-            userCompanyRoles: {
-                select: {
-                    user: {
-                        select: {
-                            employee: {
-                                select: {
-                                    id: true,
-                                    user: true,
-                                    firstName: true,
-                                    lastName: true
-                                }
+    const fetchEmployees = async () => {
+        let employees = await db.employee.findMany({
+            where: {
+                Employee_RoleContract: {
+                    some: {
+                        companyId: locals.company.id
+                    }
+                }
+            },
+            select: {
+                id: true,
+                name: true,
+                lastName: true,
+                username: true,
+                Employee_RoleContract: {
+                    orderBy: {
+                        date: 'desc'
+                    },
+                    take: 1,
+                    select: {
+                        role: {
+                            select: {
+                                name: true
                             }
                         }
                     }
+                },
+                superior: {
+                    select: {
+                        name: true
+                    }
                 }
             }
-        }
-    });
-
-    if (employeeSelection === null) {
-        return invalid(500, { invalid: true });
+        })
+        return employees.map(e => ({
+            id: e.id,
+            name: e.name,
+            lastName: e.lastName,
+            username: e.username,
+            role: e.Employee_RoleContract[0].role.name,
+            superior: e.superior?.name ?? ""
+        }));
     }
 
-    var employees = employeeSelection.userCompanyRoles
-        .map(u => u.user.employee)
-        .filter(e => {
-            return e !== null;
-        });
-
-    return invalid(200, { employees, companyId: employeeSelection.id });
+    return {
+        employees: fetchEmployees()
+    }
 }
-
-export const actions: Actions = { search }; 
