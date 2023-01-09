@@ -10,7 +10,7 @@
         <h1>Bienvenidos a <strong>Gerencia!</strong></h1>
         <h5 class="mt-3">
             Sistema de administración de empleados y de nómina simple de
-            utilizar y parametrizar.
+            utilizar y parametrizar. ...
             <br />
             Regístrate para comenzar o inicia sesión si ya tienes una cuenta
         </h5>
